@@ -286,3 +286,224 @@ or
   "message": "Server error."
 }
 ```
+
+
+## Song API
+
+### Upload Song
+
+Endpoint: `POST /api/song/upload`
+
+### Authentication
+
+Requires a valid authentication cookie.
+
+### Request
+
+Content type: `multipart/form-data`
+
+| Field | Type | Required |
+|---|---|---|
+| title | string | Yes |
+| artist | string | Yes |
+| mood | string | Yes |
+| audio | file | Yes |
+
+### Example
+
+```bash
+curl -X POST http://localhost:5000/api/song/upload ^
+  -H "Cookie: token=YOUR_TOKEN" ^
+  -F "title=Calm Waves" ^
+  -F "artist=John Doe" ^
+  -F "mood=calm" ^
+  -F "audio=@C:\Music\calm-waves.mp3"
+```
+
+### Success Response
+
+Status: `201 Created`
+
+```json
+{
+  "message": "song created sucessfully",
+  "songs": {
+    "_id": "64f2c9c1d3a1b2c3d4e5f678",
+    "title": "Calm Waves",
+    "artist": "John Doe",
+    "audio": "https://ik.imagekit.io/example/song.mp3",
+    "mood": "calm",
+    "author": "64f2c9c1d3a1b2c3d4e5f678"
+  },
+  "success": true
+}
+```
+
+### Get Songs by Mood
+
+Endpoint: `GET /api/song?mood={mood}`
+
+### Example
+
+```bash
+curl "http://localhost:5000/api/song?mood=calm"
+```
+
+### Success Response
+
+Status: `200 OK`
+
+```json
+{
+  "message": "song fetched sucessfully",
+  "songs": [
+    {
+      "_id": "64f2c9c1d3a1b2c3d4e5f678",
+      "title": "Calm Waves",
+      "artist": "John Doe",
+      "audio": "https://ik.imagekit.io/example/song.mp3",
+      "mood": "calm",
+      "author": "64f2c9c1d3a1b2c3d4e5f678"
+    }
+  ],
+  "success": true
+}
+```
+
+### Error Responses
+
+#### Missing Mood
+
+Status: `400 Bad Request`
+
+```json
+{
+  "message": "mood is required",
+  "success": false
+}
+```
+
+#### Songs Not Found
+
+Status: `404 Not Found`
+
+```json
+{
+  "message": "song not found",
+  "success": false
+}
+```
+
+
+
+
+## Playlist API
+
+All playlist endpoints require a valid authentication cookie.
+
+### Create Playlist
+
+Endpoint: `POST /api/playlists`
+
+#### Request Body
+
+```json
+{
+  "name": "Relaxing Evening",
+  "mood": "relaxed"
+}
+```
+
+#### Example
+
+```bash
+curl -X POST http://localhost:5000/api/playlists ^
+  -H "Content-Type: application/json" ^
+  -H "Cookie: token=YOUR_TOKEN" ^
+  -d "{\"name\":\"Relaxing Evening\",\"mood\":\"relaxed\"}"
+```
+
+#### Success Response
+
+Status: `201 Created`
+
+```json
+{
+  "success": true,
+  "message": "Playlist created successfully",
+  "playlist": {
+    "_id": "64f2c9c1d3a1b2c3d4e5f678",
+    "name": "Relaxing Evening",
+    "mood": "relaxed",
+    "user": "64f2c9c1d3a1b2c3d4e5f678",
+    "songs": []
+  }
+}
+```
+
+### Get User Playlists
+
+Endpoint: `GET /api/playlists`
+
+```bash
+curl http://localhost:5000/api/playlists ^
+  -H "Cookie: token=YOUR_TOKEN"
+```
+
+### Get Playlist by ID
+
+Endpoint: `GET /api/playlists/:playlistId`
+
+```bash
+curl http://localhost:5000/api/playlists/64f2c9c1d3a1b2c3d4e5f678 ^
+  -H "Cookie: token=YOUR_TOKEN"
+```
+
+### Update Playlist
+
+Endpoint: `PUT /api/playlists/:playlistId`
+
+```bash
+curl -X PUT http://localhost:5000/api/playlists/64f2c9c1d3a1b2c3d4e5f678 ^
+  -H "Content-Type: application/json" ^
+  -H "Cookie: token=YOUR_TOKEN" ^
+  -d "{\"name\":\"Updated Playlist\",\"mood\":\"happy\"}"
+```
+
+### Delete Playlist
+
+Endpoint: `DELETE /api/playlists/:playlistId`
+
+```bash
+curl -X DELETE http://localhost:5000/api/playlists/64f2c9c1d3a1b2c3d4e5f678 ^
+  -H "Cookie: token=YOUR_TOKEN"
+```
+
+### Add Song to Playlist
+
+Endpoint: `POST /api/playlists/:playlistId/songs/:songId`
+
+```bash
+curl -X POST http://localhost:5000/api/playlists/PLAYLIST_ID/songs/SONG_ID ^
+  -H "Cookie: token=YOUR_TOKEN"
+```
+
+The song's mood must match the playlist's mood.
+
+### Remove Song from Playlist
+
+Endpoint: `DELETE /api/playlists/:playlistId/songs/:songId`
+
+```bash
+curl -X DELETE http://localhost:5000/api/playlists/PLAYLIST_ID/songs/SONG_ID ^
+  -H "Cookie: token=YOUR_TOKEN"
+```
+
+### Supported Moods
+
+- `happy`
+- `sad`
+- `romantic`
+- `relaxed`
+- `energetic`
+- `angry`
