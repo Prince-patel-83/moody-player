@@ -13,11 +13,12 @@ app.use(cors(
     {
         origin: "http://localhost:5173",
         credentials: true,
-    })
+    }
+    )
 );
 
 app.use('/api/auth', AuthRoutes);
-app.use("/api/song" , SongRoutes);
+app.use("/api/songs" , SongRoutes);
 app.use("/api/playlists", playlistRoutes);
 
 

@@ -1,0 +1,455 @@
+/* .Face-Expression{
+    width: 100%;
+    height: 100%;
+    padding: 4rem 6rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.Face-Expression video{
+    width: 15rem;
+    height: 10rem;
+    object-fit: cover;
+}
+
+.Face-Expression button{
+    padding: 0.5rem 5px;
+    background-color: rgb(16, 55, 25);
+    color: aliceblue;
+    border: 1px solid black;
+    border-radius: 0.2rem;
+}
+.Face-Expression h2{
+    padding: 0 1rem;
+    font-weight: 400;
+    flex: 0 0 100%; 
+    width: 100%;  
+} */
+
+
+
+
+
+.mood-detection-section {
+  padding: 42px 5% 20px;
+  color: var(--brown);
+}
+
+/* Header */
+
+.mood-detection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 25px;
+  margin-bottom: 28px;
+}
+
+.mood-detection-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.mood-detection-eyebrow i {
+  font-size: 16px;
+}
+
+.mood-detection-header h1 {
+  max-width: 650px;
+  font-size: clamp(28px, 3.5vw, 43px);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  color: var(--brown);
+}
+
+.mood-detection-header h1 span {
+  color: var(--orange);
+}
+
+.mood-detection-header p {
+  max-width: 570px;
+  margin-top: 13px;
+  color: var(--brown-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* AI status */
+
+.ai-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 15px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: var(--cream-light);
+  color: var(--brown);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ai-status-dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.ai-ready {
+  background: var(--green);
+  box-shadow: 0 0 8px rgba(70, 114, 53, 0.45);
+}
+
+.ai-loading {
+  background: var(--amber);
+}
+
+/* Main card */
+
+.mood-detection-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+  overflow: hidden;
+  min-height: 350px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--cream-light);
+  box-shadow: var(--shadow);
+}
+
+/* Camera */
+
+.camera-preview-wrapper {
+  position: relative;
+  min-height: 350px;
+  overflow: hidden;
+  background: var(--brown);
+}
+
+.mood-camera-preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.camera-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(242, 169, 0, 0.15),
+      transparent 60%
+    ),
+    var(--brown);
+  color: var(--cream);
+}
+
+.camera-placeholder-icon {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+  border-radius: 24px;
+  background: rgba(255, 247, 141, 0.12);
+  color: var(--yellow);
+}
+
+.camera-placeholder-icon i {
+  font-size: 36px;
+}
+
+.camera-placeholder h3 {
+  font-size: 20px;
+  margin-bottom: 9px;
+}
+
+.camera-placeholder p {
+  max-width: 290px;
+  color: rgba(249, 230, 168, 0.75);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.camera-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(77, 42, 0, 0.15),
+    transparent 50%,
+    rgba(77, 42, 0, 0.15)
+  );
+}
+
+.camera-corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-color: var(--yellow);
+  border-style: solid;
+}
+
+.camera-corner.top-left {
+  top: 25px;
+  left: 25px;
+  border-width: 3px 0 0 3px;
+}
+
+.camera-corner.top-right {
+  top: 25px;
+  right: 25px;
+  border-width: 3px 3px 0 0;
+}
+
+.camera-corner.bottom-left {
+  bottom: 25px;
+  left: 25px;
+  border-width: 0 0 3px 3px;
+}
+
+.camera-corner.bottom-right {
+  bottom: 25px;
+  right: 25px;
+  border-width: 0 3px 3px 0;
+}
+
+.camera-label {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  background: var(--cream);
+  color: var(--brown);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.camera-label span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c0392b;
+}
+
+/* Analysis panel */
+
+.mood-analysis-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(25px, 3.5vw, 45px);
+}
+
+.mood-analysis-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mood-analysis-label {
+  color: var(--brown-muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.mood-analysis-icon {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: rgba(70, 114, 53, 0.12);
+  color: var(--green);
+}
+
+.mood-analysis-icon i {
+  font-size: 29px;
+}
+
+.detected-mood {
+  margin: 20px 0 10px;
+  color: var(--brown);
+  font-size: clamp(27px, 3vw, 36px);
+  font-weight: 800;
+  text-transform: capitalize;
+  overflow-wrap: anywhere;
+}
+
+.mood-analysis-description {
+  margin-bottom: 25px;
+  color: var(--brown-muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.camera-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(204, 111, 0, 0.1);
+  color: var(--orange);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.camera-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Buttons */
+
+.detect-mood-button {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 23px;
+  border: 2px solid var(--brown);
+  border-radius: 30px;
+  background: var(--amber);
+  color: var(--brown);
+  font-size: 13px;
+  font-weight: 800;
+  transition: 0.2s ease;
+}
+
+.detect-mood-button:hover:not(:disabled) {
+  background: var(--yellow);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 15px rgba(77, 42, 0, 0.12);
+}
+
+.detect-mood-button i {
+  font-size: 18px;
+}
+
+.stop-camera-button {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--brown);
+  font-size: 20px;
+}
+
+.stop-camera-button:hover:not(:disabled) {
+  background: var(--orange);
+  color: white;
+}
+
+.camera-privacy-note {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 20px;
+  color: var(--brown-muted);
+  font-size: 10px;
+}
+
+.camera-privacy-note i {
+  color: var(--green);
+  font-size: 15px;
+}
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+  .mood-detection-section {
+    padding: 35px 4% 20px;
+  }
+
+  .mood-detection-card {
+    grid-template-columns: 1fr;
+  }
+
+  .camera-preview-wrapper {
+    min-height: 320px;
+  }
+
+  .mood-analysis-panel {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .mood-detection-section {
+    padding: 25px 16px 15px;
+  }
+
+  .mood-detection-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .mood-detection-header h1 {
+    font-size: 30px;
+  }
+
+  .mood-detection-header p {
+    font-size: 13px;
+  }
+
+  .mood-detection-card {
+    border-radius: 18px;
+  }
+
+  .camera-preview-wrapper {
+    min-height: 250px;
+  }
+
+  .mood-analysis-panel {
+    padding: 23px 20px;
+  }
+
+  .detect-mood-button {
+    flex: 1;
+    padding: 13px 14px;
+    font-size: 12px;
+  }
+
+  .camera-actions {
+    width: 100%;
+  }
+}

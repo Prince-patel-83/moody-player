@@ -60,35 +60,12 @@ Status: 201 Created
 }
 ```
 
-or
-
-```json
-{
-  "errors": [
-    {
-      "msg": "Name must be at least 3 Characters long",
-      "param": "name",
-      "location": "body"
-    }
-  ]
-}
-```
-
 - 409 Conflict
   - Email already registered
 
 ```json
 {
   "message": "Email is already registered."
-}
-```
-
-- 500 Internal Server Error
-
-```json
-{
-  "message": "Server error.",
-  "success": false
 }
 ```
 
@@ -210,14 +187,6 @@ Status: 200 OK
 
 ```json
 {
-  "message": "Authentication token is required."
-}
-```
-
-or
-
-```json
-{
   "message": "Invalid or expired token."
 }
 ```
@@ -261,15 +230,6 @@ Status: 200 OK
   "message": "Authentication token is required."
 }
 ```
-
-or
-
-```json
-{
-  "message": "Invalid or expired token."
-}
-```
-
 - 404 Not Found
   - User no longer exists in the database
 
@@ -278,15 +238,6 @@ or
   "message": "User not found."
 }
 ```
-
-- 500 Internal Server Error
-
-```json
-{
-  "message": "Server error."
-}
-```
-
 
 ## Song API
 

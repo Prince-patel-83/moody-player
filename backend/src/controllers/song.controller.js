@@ -5,7 +5,8 @@ const SongModel = require("../models/song.model");
 
 const GetSongController = async (req , res)  =>{
     const {mood} = req.query;
-
+    console.log( "mood" ,mood);
+    
     if(!mood){
         return res.status(400).json({
             message : "The request is missing required data",

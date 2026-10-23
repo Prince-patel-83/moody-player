@@ -1,0 +1,218 @@
+.player {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 82px;
+
+  background: rgba(18, 18, 18, 0.97);
+  border-top: 1px solid #292929;
+
+  display: flex;
+  align-items: center;
+
+  padding: 10px 25px;
+
+  z-index: 1000;
+
+  box-sizing: border-box;
+}
+
+
+/* ---------------- SONG ---------------- */
+
+.player-song {
+  width: 30%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  min-width: 0;
+}
+
+.player-song-image {
+  width: 55px;
+  height: 55px;
+
+  border-radius: 6px;
+
+  object-fit: cover;
+
+  flex-shrink: 0;
+}
+
+.player-song-info {
+  min-width: 0;
+}
+
+.player-song-info h4 {
+  margin: 0;
+
+  color: white;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-song-info p {
+  margin: 5px 0 0;
+
+  color: #999;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* ---------------- CENTER ---------------- */
+
+.player-center {
+  width: 45%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+
+/* ---------------- CONTROLS ---------------- */
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 18px;
+}
+
+.player-control,
+.player-play {
+  border: none;
+  background: transparent;
+
+  color: #aaa;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.2s;
+}
+
+.player-control {
+  font-size: 20px;
+}
+
+.player-control:hover {
+  color: white;
+}
+
+.player-play {
+  width: 34px;
+  height: 34px;
+
+  background: white;
+
+  color: black;
+
+  border-radius: 50%;
+
+  font-size: 17px;
+}
+
+.player-play:hover {
+  transform: scale(1.05);
+}
+
+
+/* ---------------- PROGRESS ---------------- */
+
+.player-progress {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+.player-progress span {
+  color: #888;
+
+  font-size: 10px;
+
+  min-width: 30px;
+
+  text-align: center;
+}
+
+.player-progress input {
+  flex: 1;
+
+  height: 3px;
+
+  cursor: pointer;
+
+  accent-color: white;
+}
+
+
+/* ---------------- MOBILE ---------------- */
+
+@media (max-width: 768px) {
+
+  .player {
+    height: 75px;
+
+    padding: 8px 12px;
+  }
+
+  .player-song {
+    width: 35%;
+  }
+
+  .player-song-image {
+    width: 45px;
+    height: 45px;
+  }
+
+  .player-song-info h4 {
+    font-size: 12px;
+  }
+
+  .player-song-info p {
+    font-size: 10px;
+  }
+
+  .player-center {
+    width: 65%;
+  }
+
+  .player-progress {
+    width: 100%;
+  }
+
+  .player-control {
+    font-size: 17px;
+  }
+
+  .player-play {
+    width: 30px;
+    height: 30px;
+  }
+}

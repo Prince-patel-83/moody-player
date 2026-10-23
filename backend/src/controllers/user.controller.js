@@ -22,14 +22,15 @@ const sanitizeUser = (user) => {
     name: user.name,
     email: user.email,
     createdAt: user.createdAt,
+    IsAdmin: user.isUser,
   };
 };
 
 const register = async (req, res) => {
   try {
-
-    const { name, email, password } = req.body;
-    if (!name || !isValid || !password) {
+    console.log("Register Request Body:", req.body);
+    const { name, email, password , IsUser} = req.body;
+    if (!name || !email || !password || !IsUser) {
       return res.status(400).json({
         message: "Name, email, and password are required.",
       });
@@ -61,6 +62,7 @@ const register = async (req, res) => {
       name: name.trim(),
       email: normalizedEmail,
       password: hashedPassword,
+      isUser: IsUser,
     });
 
     const token = createToken(user);
@@ -91,7 +93,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    console.log("Login Request Body:", req.body);
     if (!email || !password) {
       return res.status(400).json({
         message: "Email and password are required.",
@@ -111,6 +113,12 @@ const login = async (req, res) => {
     const user = await UserModel.findOne({
       email: normalizedEmail,
     }).select("+password");
+    
+    if(!user){
+      return res.status(401).json({
+        message: "Invalid email.",
+      });
+    }
 
     const isPasswordCorrect =
       user && (await bcrypt.compare(password, user.password));
@@ -152,11 +160,13 @@ const getCurrentUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({
         message: "User not found.",
+        success:false,
       });
     }
 
     return res.status(200).json({
       user: sanitizeUser(user),
+      success:true,
     });
     
   } catch (error) {
@@ -164,6 +174,7 @@ const getCurrentUser = async (req, res) => {
 
     return res.status(500).json({
       message: "Server error.",
+      success:false,
     });
   }
 };

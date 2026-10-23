@@ -1,0 +1,787 @@
+
+/* =========================================
+   MOODY PLAYER — PINK SIDEBAR
+========================================= */
+
+:root {
+  --pink: #F4A7BB;
+  --pink-light: #FCE4EC;
+  --pink-dark: #C65F80;
+  --pink-soft: #FFF0F4;
+
+  --cream: #F9E6A8;
+  --amber: #F2A900;
+  --orange: #CC6F00;
+  --brown: #4D2A00;
+  --yellow: #FFF78D;
+  --green: #467235;
+
+  --sidebar-width: 82px;
+  --sidebar-expanded: 245px;
+}
+
+/* Main app layout */
+
+.Main {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Sidebar wrapper */
+
+.nav-section {
+  position: relative;
+  z-index: 100;
+
+  width: var(--sidebar-width);
+  height: 100vh;
+  flex-shrink: 0;
+
+  background: var(--pink-soft);
+  border-right: 1px solid rgba(77, 42, 0, 0.10);
+
+  transition: width 0.3s ease;
+}
+
+/* Expand wrapper on hover */
+
+.nav-section:has(.Nav:hover) {
+  width: var(--sidebar-expanded);
+}
+
+/* Sidebar */
+
+.Nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 34px;
+
+  width: var(--sidebar-width);
+  height: 100%;
+  padding: 24px 11px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(244, 167, 187, 0.35),
+      transparent 40%
+    ),
+    var(--pink-soft);
+
+  color: var(--brown);
+  white-space: nowrap;
+
+  transition: width 0.3s ease;
+}
+
+.Nav::-webkit-scrollbar {
+  display: none;
+}
+
+.Nav:hover {
+  width: var(--sidebar-expanded);
+}
+
+/* Brand */
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  min-height: 50px;
+  padding: 0 8px;
+}
+
+.upload-song-brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+
+  border-radius: 16px;
+
+  background: var(--brown);
+  color: var(--pink);
+
+  box-shadow: 0 6px 18px rgba(77, 42, 0, 0.16);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+.upload-song-brand-icon i {
+  font-size: 26px;
+}
+
+.Nav:hover .upload-song-brand-icon {
+  transform: rotate(-8deg);
+  background: var(--pink-dark);
+  color: white;
+}
+
+.nav-brand-text {
+  opacity: 0;
+  transform: translateX(-8px);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.3s ease;
+
+  pointer-events: none;
+}
+
+.Nav:hover .nav-brand-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.nav-brand-text h2 {
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--brown);
+}
+
+.nav-brand-text h2 span {
+  color: var(--pink-dark);
+}
+
+.nav-brand-text p {
+  margin-top: 3px;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  color: var(--pink-dark);
+}
+
+/* Menu */
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.nav-section-label {
+  padding-left: 15px;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+
+  color: #B58B95;
+
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.Nav:hover .nav-section-label {
+  opacity: 1;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+/* Links */
+
+.link {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  width: 100%;
+  min-height: 52px;
+  padding: 10px 15px;
+
+  border: 1px solid transparent;
+  border-radius: 16px;
+
+  background: transparent;
+  color: var(--brown);
+
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+
+  transition:
+    background 0.22s ease,
+    color 0.22s ease,
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+/* Icon */
+
+.nav-link-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 26px;
+  min-width: 26px;
+  height: 28px;
+}
+
+.nav-link-icon i {
+  font-size: 24px;
+  transition: transform 0.22s ease;
+}
+
+.link:hover .nav-link-icon i {
+  transform: scale(1.12);
+}
+
+/* Text */
+
+.nav-link-label {
+  opacity: 0;
+  transform: translateX(-8px);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s ease;
+
+  pointer-events: none;
+}
+
+.Nav:hover .nav-link-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Hover effect */
+
+.link:hover {
+  background: var(--pink-light);
+  color: var(--pink-dark);
+
+  border-color: rgba(198, 95, 128, 0.20);
+
+  transform: translateX(3px);
+}
+
+/* Active link */
+
+.link.active {
+  background: var(--brown);
+  color: var(--pink);
+
+  border-color: var(--brown);
+
+  box-shadow: 0 7px 18px rgba(77, 42, 0, 0.15);
+}
+
+.link.active .nav-link-icon i {
+  color: var(--pink);
+}
+
+.link.active:hover {
+  background: var(--pink-dark);
+  color: white;
+  border-color: var(--pink-dark);
+}
+
+/* Create button */
+
+.link.create-song {
+  margin-top: 8px;
+
+  background: var(--pink);
+  color: var(--brown);
+
+  border-color: rgba(198, 95, 128, 0.18);
+}
+
+.link.create-song:hover {
+  background: var(--pink-dark);
+  color: white;
+  border-color: var(--pink-dark);
+}
+
+.link.create-song.active {
+  background: var(--brown);
+  color: var(--pink);
+  border-color: var(--brown);
+}
+
+.nav-create-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 23px;
+  height: 23px;
+  min-width: 23px;
+
+  margin-left: auto;
+
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.Nav:hover .nav-create-badge {
+  opacity: 1;
+}
+
+/* Bottom section */
+
+.nav-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  margin-top: auto;
+}
+
+.nav-bottom-decoration {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-height: 48px;
+  padding: 12px 15px;
+
+  border-radius: 15px;
+
+  background: rgba(244, 167, 187, 0.25);
+  color: var(--pink-dark);
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.nav-bottom-decoration > i {
+  min-width: 26px;
+  font-size: 21px;
+  text-align: center;
+}
+
+.nav-account-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding-top: 14px;
+  border-top: 1px solid rgba(77, 42, 0, 0.12);
+}
+
+.nav-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-height: 30px;
+  padding: 0 15px;
+
+  font-size: 10px;
+  font-weight: 600;
+  color: #B58B95;
+}
+
+.nav-footer-dot {
+  width: 8px;
+  min-width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 4px rgba(70, 114, 53, 0.10);
+}
+
+/* Main content */
+
+.main-section {
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
+
+  overflow-y: auto;
+
+  background: var(--cream);
+}
+
+/* 404 */
+
+.Notfounf404 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 90vh;
+
+  font-size: clamp(40px, 8vw, 100px);
+  color: var(--pink-dark);
+}
+
+
+
+/* =========================================
+   MOBILE NAV — INSTAGRAM STYLE TOP HEADER
+========================================= */
+
+@media (max-width: 768px) {
+
+  :root {
+    --sidebar-width: 0px;
+    --sidebar-expanded: 100%;
+  }
+
+  /* Main layout */
+  .Main {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Nav wrapper becomes HEADER */
+  .nav-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+    height: 64px;
+
+    z-index: 1000;
+
+    background: var(--pink-soft);
+    border-right: none;
+    border-bottom: 1px solid rgba(77, 42, 0, 0.10);
+
+    transition: none;
+  }
+
+  /* Disable desktop hover expansion */
+  .nav-section:has(.Nav:hover) {
+    width: 100%;
+  }
+
+  /* Header */
+  .Nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 100%;
+    height: 64px;
+
+    padding: 8px 14px;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at top left,
+        rgba(244, 167, 187, 0.35),
+        transparent 40%
+      ),
+      var(--pink-soft);
+
+    transition: none;
+  }
+
+  .Nav:hover {
+    width: 100%;
+  }
+
+
+  /* =========================================
+     BRAND
+  ========================================= */
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    min-height: auto;
+    padding: 0;
+
+    flex-shrink: 0;
+  }
+
+  .upload-song-brand-icon {
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+
+    border-radius: 13px;
+  }
+
+  .upload-song-brand-icon i {
+    font-size: 22px;
+  }
+
+  /* Show brand text on mobile */
+  .nav-brand-text {
+    opacity: 1;
+    transform: none;
+
+    pointer-events: auto;
+  }
+
+  .nav-brand-text h2 {
+    font-size: 20px;
+    letter-spacing: -0.8px;
+  }
+
+  .nav-brand-text p {
+    display: none;
+  }
+
+
+  /* =========================================
+     MENU
+  ========================================= */
+
+  .nav-menu {
+    display: flex;
+    flex-direction: row;
+
+    flex: 1;
+
+    margin-left: auto;
+
+    gap: 0;
+  }
+
+  /* Hide MENU heading */
+  .nav-section-label {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: flex-end;
+
+    width: 100%;
+
+    gap: 4px;
+  }
+
+
+  /* =========================================
+     NAV LINKS
+  ========================================= */
+
+  .link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    min-height: 42px;
+
+    padding: 0;
+
+    border-radius: 12px;
+
+    gap: 0;
+
+    transform: none !important;
+  }
+
+  .link:hover {
+    transform: none !important;
+  }
+
+  .nav-link-icon {
+    width: 26px;
+    min-width: 26px;
+    height: 28px;
+  }
+
+  .nav-link-icon i {
+    font-size: 22px;
+  }
+
+  /* Hide text */
+  .nav-link-label {
+    display: none;
+  }
+
+
+  /* =========================================
+     CREATE BADGE
+  ========================================= */
+
+  .nav-create-badge {
+    display: none;
+  }
+
+
+  /* =========================================
+     BOTTOM ACCOUNT SECTION
+     Convert it to HEADER RIGHT SIDE
+  ========================================= */
+
+  .nav-bottom {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-top: 0;
+
+    gap: 4px;
+
+    flex-shrink: 0;
+  }
+
+  /* Hide decoration */
+  .nav-bottom-decoration {
+    display: none;
+  }
+
+  /* Account links become horizontal */
+  .nav-account-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 4px;
+
+    padding-top: 0;
+
+    border-top: none;
+  }
+
+  /* Account buttons */
+  .nav-account-links .link {
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    min-height: 42px;
+
+    padding: 0;
+  }
+
+  /* Hide footer text completely */
+  .nav-footer {
+    display: none;
+  }
+
+
+  /* =========================================
+     MAIN CONTENT
+  ========================================= */
+
+  .main-section {
+    width: 100%;
+    height: 100vh;
+
+    padding-top: 64px;
+
+    overflow-y: auto;
+  }
+}
+
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 480px) {
+
+  .Nav {
+    padding: 7px 10px;
+  }
+
+  .nav-brand-text h2 {
+    font-size: 18px;
+  }
+
+  .upload-song-brand-icon {
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+
+    border-radius: 11px;
+  }
+
+  .upload-song-brand-icon i {
+    font-size: 20px;
+  }
+
+  .link {
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+    min-height: 38px;
+  }
+
+  .nav-account-links .link {
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+    min-height: 38px;
+  }
+
+  .nav-link-icon i {
+    font-size: 20px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Reduced motion */
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  .Nav,
+  .nav-section,
+  .link,
+  .link i,
+  .nav-link-label,
+  .nav-brand-text {
+    transition: none;
+  }
+}

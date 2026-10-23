@@ -8,6 +8,7 @@ const protect = (req, res, next) => {
     if (!token) {
       return res.status(401).json({
         message: "Authentication token is required.",
+        success:false,
       });
     }
 
@@ -19,6 +20,7 @@ const protect = (req, res, next) => {
   } catch (error) {
     return res.status(401).json({
       message: "Invalid or expired token.",
+      success:false,
     });
   }
 };

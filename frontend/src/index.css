@@ -1,0 +1,356 @@
+/* Responsive overrides for moody player. Keep this file separate from app.css. */
+@media (min-width:1200px) {
+    .page-shell {
+        padding: 54px 5vw
+    }
+
+    .upload-song-wrapper {
+        max-width: 1240px
+    }
+
+    .mood-collection-card {
+        width: 185px;
+        min-width: 185px
+    }
+
+    .mood-card-image-wrapper {
+        height: 165px
+    }
+}
+
+@media (max-width:1000px) {
+    .upload-song-content {
+        grid-template-columns: minmax(0, 1.2fr) minmax(250px, .8fr);
+        gap: 18px
+    }
+
+    .upload-song-preview {
+        padding: 22px
+    }
+
+    .page-shell {
+        padding: 30px
+    }
+
+    .mood-collection-section {
+        padding: 30px
+    }
+
+    .mood-collection-container {
+        gap: 32px
+    }
+}
+
+@media (max-width:800px) {
+    .nav-section {
+        width: 64px;
+        flex-basis: 64px
+    }
+
+    .Nav {
+        padding: 16px 6px
+    }
+
+    .link {
+        padding: 10px 13px
+    }
+
+    .upload-song-content {
+        grid-template-columns: 1fr
+    }
+
+    .upload-song-preview {
+        position: relative;
+        top: auto;
+        min-height: 0
+    }
+
+    .upload-preview-image {
+        width: 160px
+    }
+
+    .search-hero {
+        padding: 30px
+    }
+
+    .mood-header-stamp {
+        width: 75px;
+        height: 75px
+    }
+
+    .mood-header-stamp i {
+        font-size: 24px
+    }
+}
+
+@media (max-width:600px) {
+    .page-shell {
+        padding: 22px 16px 100px
+    }
+
+    .page-heading {
+        margin-bottom: 25px
+    }
+
+    .page-heading h1,
+    .search-hero h1,
+    .mood-collection-header h1 {
+        font-size: clamp(30px, 9vw, 40px);
+        letter-spacing: -1.2px
+    }
+
+    .page-heading p,
+    .search-hero>p,
+    .mood-collection-header p {
+        font-size: 13px
+    }
+
+    .upload-song-card {
+        padding: 21px;
+        border-radius: 18px
+    }
+
+    .upload-song-card-header {
+        margin-bottom: 23px
+    }
+
+    .upload-song-mood-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px
+    }
+
+    .upload-mood-option {
+        min-height: 76px
+    }
+
+    .upload-song-preview {
+        border-radius: 18px
+    }
+
+    .search-hero {
+        padding: 25px 19px;
+        border-radius: 21px
+    }
+
+    .search-hero:after {
+        font-size: 190px;
+        right: -25px;
+        top: -15px
+    }
+
+    .music-search-input-wrapper {
+        height: 54px;
+        padding: 0 13px
+    }
+
+    .music-search-input {
+        font-size: 13px
+    }
+
+    .music-search-results {
+        padding-top: 28px
+    }
+
+    .search-results-heading h2 {
+        font-size: 21px
+    }
+
+    .music-search-song-card {
+        gap: 11px;
+        padding: 10px;
+        border-radius: 14px
+    }
+
+    .search-song-art {
+        width: 48px;
+        height: 48px
+    }
+
+    .music-search-song-title {
+        font-size: 13px
+    }
+
+    .music-search-song-artist {
+        font-size: 11px
+    }
+
+    .search-song-mood {
+        display: none
+    }
+
+    .music-search-song-play {
+        width: 36px;
+        height: 36px;
+        font-size: 19px
+    }
+
+    .mood-collection-header {
+        align-items: flex-start
+    }
+
+    .mood-header-stamp {
+        width: 58px;
+        height: 58px
+    }
+
+    .mood-header-stamp i {
+        font-size: 19px
+    }
+
+    .mood-header-stamp span {
+        font-size: 6px;
+        letter-spacing: 1px
+    }
+
+    .mood-collection-container {
+        gap: 29px
+    }
+
+    .mood-row-heading {
+        align-items: flex-start
+    }
+
+    .mood-row-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 14px;
+        font-size: 22px
+    }
+
+    .mood-row-title {
+        gap: 10px
+    }
+
+    .mood-row-title h2 {
+        font-size: 16px
+    }
+
+    .mood-row-title p {
+        font-size: 10px;
+        line-height: 1.4
+    }
+
+    .mood-track-count {
+        font-size: 10px;
+        padding-top: 5px
+    }
+
+    .mood-collection-card {
+        width: 145px;
+        min-width: 145px;
+        padding: 8px;
+        border-radius: 15px
+    }
+
+    .mood-card-image-wrapper {
+        height: 130px
+    }
+
+    .mood-card-play {
+        opacity: 1;
+        transform: none;
+        width: 34px;
+        height: 34px;
+        font-size: 19px
+    }
+
+    .mood-card-info {
+        padding: 10px 3px 4px
+    }
+
+    .mood-card-info h3 {
+        font-size: 12px
+    }
+
+    .mood-card-info p {
+        font-size: 10px
+    }
+
+    .mood-empty-row {
+        padding: 17px;
+        font-size: 12px
+    }
+
+    .not-found-art {
+        font-size: 100px
+    }
+}
+
+@media (max-width:420px) {
+    .nav-section {
+        width: 55px;
+        flex-basis: 55px
+    }
+
+    .link {
+        margin: 0;
+        padding: 10px
+    }
+
+    .link i {
+        font-size: 21px
+    }
+
+    .upload-song-card {
+        padding: 17px
+    }
+
+    .upload-song-input {
+        padding: 0 11px
+    }
+
+    .upload-song-input input {
+        font-size: 12px
+    }
+
+    .upload-song-file-input input {
+        font-size: 10px
+    }
+
+    .mood-track-count {
+        display: none
+    }
+
+    .mood-header-stamp {
+        display: none
+    }
+
+    .music-search-song-card {
+        gap: 8px;
+        padding: 8px
+    }
+
+    .search-song-art {
+        width: 43px;
+        height: 43px
+    }
+
+    .music-search-song-info {
+        margin-left: 0
+    }
+
+    .music-search-song-title {
+        font-size: 12px
+    }
+
+    .music-search-song-artist {
+        font-size: 10px
+    }
+
+    .music-search-song-play {
+        width: 32px;
+        height: 32px
+    }
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important
+    }
+}

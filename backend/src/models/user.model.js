@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema(
       minlength: 8,
       select: false,
     },
+    isUser:{
+      type:Boolean,
+      default:true,
+      required:true
+    }
   },
   {
     timestamps: true,
