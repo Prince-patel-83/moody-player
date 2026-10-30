@@ -1,66 +1,24 @@
 
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-
-import axios from "../APi/axiosConfig";
+import { songcontext } from "../Wrapper.jsx";
 import "./Profile.css";
 
 function Profile() {
-  const [user, setUser] = useState(null);
-  const [playlists, setPlaylists] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const {
+    userData,
+    playlists = [],
+  } = useContext(songcontext);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    const fetchProfile = async () => {
-      try {
-        setLoading(true);
-        setError("");
-
-        const response = await axios.get("/api/auth/me");
-        const data = response.data;
-
-        if (!data?.user) {
-          throw new Error("Profile information was not returned.");
-        }
-
-        if (!cancelled) {
-          setUser(data.user);
-          setPlaylists(data.playlists || []);
-        }
-      } catch (err) {
-        console.error(err);
-
-        if (!cancelled) {
-          setError(
-            err.response?.data?.message ||
-            err.message ||
-            "Unable to load your profile."
-          );
-        }
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
-      }
-    };
-
-    fetchProfile();
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
+  // Total songs in all playlists
   const totalSongs = playlists.reduce(
     (total, playlist) =>
       total + (playlist.songs?.length || 0),
     0
   );
 
-  const initials = user?.name
+  // User initials
+  const initials = userData?.name
     ?.trim()
     .split(/\s+/)
     .map((word) => word[0])
@@ -68,8 +26,9 @@ function Profile() {
     .slice(0, 2)
     .toUpperCase();
 
-  const memberSince = user?.createdAt
-    ? new Date(user.createdAt).toLocaleDateString(
+  // Member since
+  const memberSince = userData?.createdAt
+    ? new Date(userData.createdAt).toLocaleDateString(
         "en-IN",
         {
           month: "short",
@@ -78,44 +37,34 @@ function Profile() {
       )
     : "Not available";
 
-  if (loading) {
-    return (
-      <div className="profile-message">
-        <i className="ri-loader-4-line"></i>
-        Loading your profile...
-      </div>
-    );
-  }
+  // Favorite mood
+  const favoriteMood =
+    playlists.length > 0 && playlists[0]?.mood
+      ? playlists[0].mood
+      : "None";
 
-  if (error || !user) {
+  // User not available
+  if (!userData) {
     return (
       <div className="profile-message">
         <div className="profile-error-card">
           <i className="ri-user-unfollow-line"></i>
           <h2>Profile unavailable</h2>
-          <p>{error || "User not found."}</p>
+          <p>Please login to view your profile.</p>
 
-          <button
-            className="profile-primary-btn"
-            onClick={() => window.location.reload()}
-          >
-            Try Again
-          </button>
+          <Link to="/login" className="profile-primary-btn">
+            Login
+          </Link>
         </div>
       </div>
     );
   }
 
-  const favoriteMood =
-    playlists.length && playlists[0]?.mood
-      ? playlists[0].mood
-      : "None";
-
   return (
     <div className="profile-page">
       <main className="profile-container">
-        {/* Heading */}
 
+        {/* Heading */}
         <div className="profile-heading">
           <div>
             <p className="profile-eyebrow">
@@ -132,17 +81,14 @@ function Profile() {
 
           <button
             className="edit-btn"
-            onClick={() =>
-              console.log("Edit profile clicked")
-            }
+            onClick={() => console.log("Edit profile clicked")}
           >
             <i className="ri-edit-line"></i>
             Edit Profile
           </button>
         </div>
 
-        {/* User information */}
-
+        {/* User Information */}
         <section className="profile-card">
           <div className="profile-user">
             <div className="avatar">
@@ -156,9 +102,11 @@ function Profile() {
                 WELCOME BACK
               </span>
 
-              <h2>{user.name || "Music Lover"}</h2>
+              <h2>{userData.name || "Music Lover"}</h2>
 
-              <p>{user.email || "No email available"}</p>
+              <p>
+                {userData.email || "No email available"}
+              </p>
 
               <span className="member-badge">
                 <i className="ri-music-2-fill"></i>
@@ -178,8 +126,8 @@ function Profile() {
         </section>
 
         {/* Statistics */}
-
         <section className="stats-grid">
+
           <div className="stat-card">
             <div className="stat-icon stat-icon-green">
               <i className="ri-play-list-2-fill"></i>
@@ -214,11 +162,12 @@ function Profile() {
               </h2>
             </div>
           </div>
+
         </section>
 
-        {/* Playlist collection */}
-
+        {/* Playlist Collection */}
         <section className="playlist-section">
+
           <div className="section-heading">
             <div>
               <p className="profile-eyebrow">
@@ -232,16 +181,14 @@ function Profile() {
               </p>
             </div>
 
-            <Link
-              to="/playlists"
-              className="view-all"
-            >
+            <Link to="/playlists" className="view-all">
               View All
               <i className="ri-arrow-right-line"></i>
             </Link>
           </div>
 
           {playlists.length === 0 ? (
+
             <div className="empty-state">
               <div className="empty-icon">
                 <i className="ri-music-2-line"></i>
@@ -254,16 +201,16 @@ function Profile() {
                 your mood a soundtrack.
               </p>
 
-              <Link
-                to="/playlists"
-                className="create-btn"
-              >
+              <Link to="/playlists" className="create-btn">
                 <i className="ri-add-line"></i>
                 Explore Playlists
               </Link>
             </div>
+
           ) : (
+
             <div className="playlist-grid">
+
               {playlists.map((playlist) => (
                 <div
                   className="playlist-card"
@@ -297,16 +244,16 @@ function Profile() {
                   <Link
                     to={`/playlists/${playlist._id}`}
                     className="playlist-open"
-                    aria-label={`Open ${
-                      playlist.name || "playlist"
-                    }`}
+                    aria-label={`Open ${playlist.name || "playlist"}`}
                   >
                     <i className="ri-arrow-up-right-line"></i>
                   </Link>
                 </div>
               ))}
+
             </div>
           )}
+
         </section>
       </main>
     </div>
