@@ -1,7 +1,7 @@
 
 import { NavLink } from "react-router-dom";
 import "./Nav.css"
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import  {songcontext} from "../Wrapper";
 
 
@@ -77,13 +77,7 @@ const Nav = () => {
 
       {/* Bottom account section */}
       <div className="nav-bottom">
-        <div className="nav-bottom-decoration">
-          <i className="ri-sparkling-2-fill"></i>
-          <span className="nav-link-label">
-            Your mood, your music.
-          </span>
-        </div>
-
+       
         <div className="nav-account-links">
           {accountLinks.map(renderLink)}
         </div>

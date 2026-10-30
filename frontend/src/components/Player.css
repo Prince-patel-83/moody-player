@@ -1,14 +1,16 @@
 .player {
   position: fixed;
-  left: 0;
-  bottom: 0;
+  display: block;
+  left: 10%;
+  bottom: -1px;
 
-  width: 100%;
+  width: 80%;
   height: 82px;
 
   background: rgba(18, 18, 18, 0.97);
   border-top: 1px solid #292929;
 
+  border-radius: 10px;
   display: flex;
   align-items: center;
 
@@ -19,8 +21,6 @@
   box-sizing: border-box;
 }
 
-
-/* ---------------- SONG ---------------- */
 
 .player-song {
   width: 30%;

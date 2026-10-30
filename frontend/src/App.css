@@ -458,6 +458,9 @@ img {
     max-width: 1100px;
     margin: 0 auto
 }
+.music-search-page::-webkit-scrollbar {
+   display: none;
+}
 
 .search-hero {
     padding: clamp(26px, 5vw, 58px);

@@ -1,80 +1,3 @@
-// import { useContext,useEffect,useRef,useState } from 'react'
-// import { songcontext } from '../Wrapper'
-// // import SongPlayer from '../components/SongPlayer'
-// import "./MoodSongs.css"
-// import './faceExpression.css'
-
-// const MoodSongs = () => {
-
-// const { Songs }= useContext(songcontext); 
-// const {currentSong, setCurrentSong} = useContext(songcontext);
-// const {isPlaying, setIsPlaying} = useContext(songcontext);
-// const audioRef = useRef(null);
-
-
-
-//   useEffect(()=>{
-//   }, [currentSong])
-
-  
-// const HandlePlay =(idx)=>{
-//     setCurrentSong(idx);
-
-//     if(isPlaying === idx){
-//         setIsPlaying(null);
-//     }else{
-//         setIsPlaying(idx);
-//     }
-// }
-
-//   return (
-//     <>
-//     <div className='Songs'>
-//         <h1>Recomanded Songs</h1>
-
-//         {Songs.map((song , idx)=>{
-//         return <div className='song' key={idx}>
-//                 <div className='title'>
-//                     <h3>{song.title}</h3>
-//                     <h4>{song.artist}</h4>
-                    
-//                 </div>
-//                 <div onClick={()=>HandlePlay(idx)} className='play-pause-button'>
-//                     {isPlaying === idx && 
-//                         <audio src={Songs[currentSong].audio}
-//                             ref={audioRef}
-//                             autoPlay = {isPlaying === idx}
-//                         ></audio>
-//                     }
-                    
-//                     {isPlaying === idx ? (
-//                         <i className="ri-pause-fill"></i>
-//                     ) : (
-//                         <i className="ri-play-large-fill"></i>
-//                     )}
-//                 </div>
-//             </div>
-//         })}
-         
-//     </div>
-    
-//     {/* < SongPlayer audioRef={audioRef} songs={Songs} /> */}
-    
-// </>
-//   )
-// }
-
-// export default MoodSongs
-
-
-
-
-
-
-
-
-
-
 
 import { useContext, useEffect } from "react";
 import { songcontext } from "../Wrapper.jsx";
@@ -82,82 +5,47 @@ import "./MoodSongs.css";
 
 const MoodSongs = () => {
   const {
-    Songs,
-    currentPlaylistSongs,
+    Songs = [],
     setCurrentPlaylistSongs,
+    currentPlaylistSongs = [],
     currentIndex,
     setCurrentIndex,
     isPlaying,
     setIsPlaying,
-    audioRef,
   } = useContext(songcontext);
 
-  // Songs load hone ke baad current playlist set karo
-  useEffect(() => {
-    if (Songs?.length > 0) {
-      setCurrentPlaylistSongs(Songs);
-    }
-  }, [Songs, setCurrentPlaylistSongs]);
-
-  // Play / Pause
-  const HandlePlay = (idx) => {
-    // Agar same song chal raha hai -> pause
-    if (currentIndex === idx && isPlaying) {
-      setIsPlaying(false);
-
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
-
-      return;
-    }
-
-    // Recommended songs ko current playlist banao
-    setCurrentPlaylistSongs(Songs);
-
-    // Current song set karo
-    setCurrentIndex(idx);
-
-    // Play state
-    setIsPlaying(true);
-  };
-
-  // Jab currentIndex ya isPlaying change ho
-  // tab actual audio control karo
-  useEffect(() => {
-    if (!audioRef.current || !currentPlaylistSongs?.length) {
-      return;
-    }
+  // Play / Pause song
+  const HandlePlay = (song, idx) => {
 
     const currentSong = currentPlaylistSongs[currentIndex];
 
-    if (!currentSong?.audio) {
+    // Same song click -> Pause
+    if (
+      currentSong?._id === song._id &&
+      isPlaying
+    ) {
+      setIsPlaying(false);
       return;
     }
 
-    audioRef.current.src = currentSong.audio;
+    // New song or paused song -> Play
+    setCurrentPlaylistSongs(Songs);
+    setCurrentIndex(idx);
+    setIsPlaying(true);
+  };
 
-    if (isPlaying) {
-      audioRef.current
-        .play()
-        .catch((error) => {
-          console.log("Audio play error:", error);
-        });
-    } else {
-      audioRef.current.pause();
-    }
-  }, [
-    currentIndex,
-    isPlaying,
-    currentPlaylistSongs,
-    audioRef,
-  ]);
+  // Check whether selected song is currently playing
+  const isSongPlaying = (song) => {
+    const currentSong = currentPlaylistSongs[currentIndex];
+
+    return (
+      currentSong?._id === song._id &&
+      isPlaying
+    );
+  };
 
   return (
     <section className="mood-song-section">
-
-      {/* Hidden audio player */}
-      <audio ref={audioRef} />
 
       <div className="mood-song-heading">
         <div>
@@ -181,11 +69,11 @@ const MoodSongs = () => {
 
       <div className="mood-song-list">
 
-        {Songs?.length > 0 ? (
+        {Songs.length > 0 ? (
+
           Songs.map((song, idx) => {
 
-            const isCurrentSong =
-              currentIndex === idx && isPlaying;
+            const isCurrentSong = isSongPlaying(song);
 
             return (
               <div
@@ -236,7 +124,7 @@ const MoodSongs = () => {
                   )}
 
                   <button
-                    onClick={() => HandlePlay(idx)}
+                    onClick={() => HandlePlay(song, idx)}
                     className="mood-song-play-button"
                     aria-label={
                       isCurrentSong
@@ -258,6 +146,7 @@ const MoodSongs = () => {
               </div>
             );
           })
+
         ) : (
 
           <div className="mood-song-empty">

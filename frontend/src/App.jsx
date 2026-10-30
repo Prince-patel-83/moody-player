@@ -1,7 +1,7 @@
 import Mainroutes from './routes/Mainroutes'
 import './App.css'
 import Nav from "./components/Nav"
-import AuthWrapper from './routes/AuthWrapper'
+import Player from './components/Player'
 
 function App() {
  
@@ -13,6 +13,7 @@ function App() {
 
   <div className="main-section">
     <Mainroutes/>
+    <Player/>
    </div>
 </div>
 )

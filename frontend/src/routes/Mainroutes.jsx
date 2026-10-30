@@ -16,7 +16,6 @@ const Profile = lazy(() => import('../pages/Profile.jsx'));
 const Mainroutes = ()=>{
 
   const {userData} = useContext(songcontext);
-  console.log("masin " , userData);
   
   return (
     <Routes>

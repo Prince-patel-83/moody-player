@@ -1,112 +1,3 @@
-// import { useContext, useEffect, useRef, useState } from "react";
-// import * as faceapi from "face-api.js";
-// import axios from '../APi/axiosConfig.jsx'
-// import "./faceExpression.css"
-// import { songcontext } from "../Wrapper.jsx";
-
-// const FaceDetection = () => {
-//   const videoRef = useRef(null);
-//   const [expression, setExpression] = useState("Loading...");
-//   const {setSongs} = useContext(songcontext);
-//   useEffect(() => {
-//      loadModels();
-//   }, []);
-
-//   const loadModels = async () => {
-//     try {
-//       await Promise.all([
-//         faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
-//         faceapi.nets.faceExpressionNet.loadFromUri("/models"),
-//       ]);
-
-//       startVideo();
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-
-//   const startVideo = async () => {
-//     try {
-//       const stream = await navigator.mediaDevices.getUserMedia({
-//         video: true,
-//       });
-
-//       videoRef.current.srcObject = stream;
-
-//       videoRef.current.onloadedmetadata = () => {
-//         videoRef.current.play();
-//       };
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-
-//   const detectExpressions = async () => {
-
-//     // setInterval( () => {
-//       if (!videoRef.current) return;
-
-//       const detection = await faceapi
-//         .detectSingleFace(
-//           videoRef.current,
-//           new faceapi.TinyFaceDetectorOptions()
-//         )
-//         .withFaceExpressions();
-
-//       if (!detection) {
-//         setExpression("No Face");
-//         return;
-//       }
-
-//       const bestExpression = Object.entries(detection.expressions).reduce(
-//         (prev, current) => (prev[1] > current[1] ? prev : current)
-//       );
-//       console.log("expression "+bestExpression);
-
-//       setExpression(bestExpression[0]);
-
-//       const {data} = await axios.get(`/songs?mood=${bestExpression[0]}`);
-//       console.log(data);
-
-//       setSongs(data.songs);
-
-//   };
-
-
-//   return (
-//     <>
-//     <div className="Face-Expression">
-//       <h2 >Live Face Expression</h2>
-//       <video
-//         ref={videoRef}
-//         width="600"
-//         height="450"
-//         autoPlay
-//         muted
-//         playsInline
-//         style={{
-//           border: "2px solid black",
-//           borderRadius: "10px",
-//         }}
-//       />
-//       <button onClick={detectExpressions}>Detect FACE</button>
-//       <h2 className="Expression" >{expression}</h2>
-//     </div>
-//     </>
-//   );
-// };
-
-// export default FaceDetection;
-
-
-
-
-
-
-
-
-
-
 import {
   useContext,
   useEffect,
@@ -137,9 +28,6 @@ const FaceDetection = () => {
     setIsPlaying ,
   } = useContext(songcontext);
 
-  // --------------------------------
-  // LOAD FACE API MODELS
-  // --------------------------------
 
   useEffect(() => {
     let cancelled = false;
@@ -184,9 +72,6 @@ const FaceDetection = () => {
     };
   }, []);
 
-  // --------------------------------
-  // START CAMERA
-  // --------------------------------
 
   const startCamera = async () => {
     try {
@@ -254,9 +139,6 @@ const FaceDetection = () => {
     }
   };
 
-  // --------------------------------
-  // STOP CAMERA
-  // --------------------------------
 
   const stopCamera = () => {
     if (streamRef.current) {
@@ -277,9 +159,6 @@ const FaceDetection = () => {
     setExpression("Ready");
   };
 
-  // --------------------------------
-  // DETECT FACE + EXPRESSION
-  // --------------------------------
 
  const detectExpressions = async () => {
   if (!videoRef.current) {
@@ -434,9 +313,6 @@ const FaceDetection = () => {
 
     console.log("ALL FACES:", detections);
   };
-  // --------------------------------
-  // DESCRIPTION
-  // --------------------------------
 
   const description = () => {
     if (!modelsLoaded) {
@@ -481,9 +357,6 @@ const FaceDetection = () => {
     return "Expression detected. Your music recommendations have been updated.";
   };
 
-  // --------------------------------
-  // UI
-  // --------------------------------
 
   return (
     <section className="mood-detection-section">

@@ -71,7 +71,33 @@ const UploadSongController = async (req,res)=>{
     
 }
 
+const SearchSongController = async (req, res) => {
+    
+   try {
+        const { query } = req.query; 
+
+        if (!query) {
+            return res.status(400).json({ message: "Search query is required" });
+        }
+
+        const songs = await SongModel.find({
+            title: { $regex: query, $options: 'i' } // 'i' का मतलब Case-insensitive (Small/Capital letters दोनों)
+        });
+
+         res.status(200).json({
+            message: "Search results fetched successfully",
+            songs: songs,
+            success: true
+        });
+
+    } catch (error) {
+        console.error("Error searching songs:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}
+
 module.exports  = {
     GetSongController,
-    UploadSongController
+    UploadSongController,
+    SearchSongController
 }
