@@ -188,9 +188,95 @@ const logoutController =  (req, res) => {
 }
 
 
+const UpdateProfile = async (req, res) => {
+  try {
+    const userId = req.userId;
+
+    const { name, email } = req.body;
+
+    // Validate fields
+    if (!name?.trim() || !email?.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: "Name and email are required",
+      });
+    }
+
+    const updatedName = name.trim();
+    const updatedEmail = email.trim().toLowerCase();
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(updatedEmail)) {
+      return res.status(400).json({
+        success: false,
+        message: "Please enter a valid email address",
+      });
+    }
+
+    // Check existing email
+    const existingUser = await UserModel.findOne({
+      email: updatedEmail,
+      _id: { $ne: userId },
+    });
+
+    if (existingUser) {
+      return res.status(409).json({
+        success: false,
+        message: "Email is already registered",
+      });
+    }
+
+    // Update user
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      userId,
+      {
+        $set: {
+          name: updatedName,
+          email: updatedEmail,
+        },
+      },
+      {
+       returnDocument: "after",
+      }
+    ).select("-password");
+
+    if (!updatedUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      user: sanitizeUser(updatedUser),
+    });
+
+  } catch (error) {
+    console.error("Update Profile Error:", error);
+
+    // MongoDB duplicate key error
+    if (error.code === 11000) {
+      return res.status(409).json({
+        success: false,
+        message: "Email is already registered",
+      });
+    }
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
   getCurrentUser,
+  UpdateProfile,
   logoutController,
 };

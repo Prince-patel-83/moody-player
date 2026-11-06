@@ -1,16 +1,41 @@
 
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { songcontext } from "../Wrapper.jsx";
+import axios from "../APi/axiosConfig";
 import "./Profile.css";
 
 function Profile() {
   const {
     userData,
     playlists = [],
+    setuserData,
+    setPlaylists,
   } = useContext(songcontext);
 
-  // Total songs in all playlists
+  const navigate = useNavigate();
+
+  // Logout
+  const HandleLogout = async () => {
+    try {
+      const response = await axios.get("/api/auth/logout", {
+        withCredentials: true,
+      });
+
+      if (response.status === 200) {
+        setuserData(null);
+        setPlaylists([]);
+        navigate("/login", { replace: true });
+      }
+    } catch (error) {
+      console.error(
+        "Logout Error:",
+        error.response?.data || error.message
+      );
+    }
+  };
+
+  // Total songs
   const totalSongs = playlists.reduce(
     (total, playlist) =>
       total + (playlist.songs?.length || 0),
@@ -25,6 +50,10 @@ function Profile() {
     .join("")
     .slice(0, 2)
     .toUpperCase();
+
+  const UpdateProfile = () => {
+    navigate("/update-profile");
+  };
 
   // Member since
   const memberSince = userData?.createdAt
@@ -79,13 +108,23 @@ function Profile() {
             </p>
           </div>
 
-          <button
-            className="edit-btn"
-            onClick={() => console.log("Edit profile clicked")}
-          >
-            <i className="ri-edit-line"></i>
-            Edit Profile
-          </button>
+          <div className="profile-actions">
+            <button
+              className="edit-btn"
+              onClick={UpdateProfile}
+            >
+              <i className="ri-edit-line"></i>
+              Edit Profile
+            </button>
+
+            <button
+              className="logout-btn"
+              onClick={HandleLogout}
+            >
+              <i className="ri-logout-box-r-line"></i>
+              Logout
+            </button>
+          </div>
         </div>
 
         {/* User Information */}
@@ -139,16 +178,18 @@ function Profile() {
             </div>
           </div>
 
-          <div className="stat-card">
-            <div className="stat-icon stat-icon-amber">
-              <i className="ri-music-2-fill"></i>
-            </div>
+          {userData.IsAdmin && (
+            <div className="stat-card">
+              <div className="stat-icon stat-icon-amber">
+                <i className="ri-music-2-fill"></i>
+              </div>
 
-            <div>
-              <p>Total Songs</p>
-              <h2>{totalSongs}</h2>
+              <div>
+                <p>Total Songs</p>
+                <h2>{totalSongs}</h2>
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="stat-card">
             <div className="stat-icon stat-icon-orange">
@@ -188,7 +229,6 @@ function Profile() {
           </div>
 
           {playlists.length === 0 ? (
-
             <div className="empty-state">
               <div className="empty-icon">
                 <i className="ri-music-2-line"></i>
@@ -206,9 +246,7 @@ function Profile() {
                 Explore Playlists
               </Link>
             </div>
-
           ) : (
-
             <div className="playlist-grid">
 
               {playlists.map((playlist) => (

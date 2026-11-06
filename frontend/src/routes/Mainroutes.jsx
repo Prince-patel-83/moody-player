@@ -11,7 +11,7 @@ const PageNotFound = lazy(() => import('../pages/PageNotFound.jsx'));
 const Home = lazy(() => import('../pages/Home.jsx'));
 const Upload = lazy(() => import('../pages/Upload.jsx'));
 const Profile = lazy(() => import('../pages/Profile.jsx'));
-
+const UpdateProfile = lazy(() => import('../pages/UpdateProfile.jsx'));
 
 const Mainroutes = ()=>{
 
@@ -29,6 +29,7 @@ const Mainroutes = ()=>{
       // authroutes means user logged in
       <> 
         <Route path='/profile' element= { <Profile/> }/>
+        <Route path='/update-profile' element= { <UpdateProfile/> }/>
         <Route path='/playlists' element= { <Fav/> }/>
         {userData.IsAdmin ? <Route path='/create-song' element= {<Upload/>}/> : ""}
         

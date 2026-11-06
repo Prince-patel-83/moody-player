@@ -1009,3 +1009,364 @@ img {
 .main-section::-webkit-scrollbar {
     display: none
 }
+
+
+
+/*  update profile 1015 - 1373  */
+.update-profile-page {
+  min-height: 90vh;
+  background: var(--bg-color);
+  color: var(--brown);
+  padding: 55px 25px;
+  font-family: Helvetica, sans-serif;
+}
+
+.update-profile-container {
+  max-width: 850px;
+  margin: auto;
+}
+
+/* Header */
+
+.update-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 35px;
+}
+
+.update-profile-eyebrow {
+  color: var(--orange);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.update-profile-header h1 {
+  font-size: 35px;
+  margin: 13px 0 8px;
+  color: var(--brown);
+}
+
+.update-profile-header p {
+  color: var(--brown-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.update-header-icon {
+  width: 65px;
+  height: 65px;
+  border-radius: 18px;
+  background: var(--yellow);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  border: 1px solid var(--line);
+}
+
+/* Main Card */
+
+.update-profile-card {
+  background: var(--cream-light);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 35px;
+  box-shadow: var(--shadow);
+}
+
+/* Avatar */
+
+.update-avatar-section {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.update-avatar {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--amber), var(--orange));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: 700;
+  color: white;
+  box-shadow: 0 6px 18px rgba(204, 111, 0, 0.2);
+}
+
+.update-avatar-section h3 {
+  font-size: 20px;
+  margin-bottom: 7px;
+  color: var(--brown);
+}
+
+.update-avatar-section p {
+  color: var(--brown-muted);
+  font-size: 13px;
+}
+
+.update-divider {
+  height: 1px;
+  background: var(--line);
+  margin: 30px 0;
+}
+
+/* Form */
+
+.update-form-heading {
+  margin-bottom: 27px;
+}
+
+.update-form-heading h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: var(--brown);
+}
+
+.update-form-heading p {
+  color: var(--brown-muted);
+  font-size: 13px;
+}
+
+.update-form-group {
+  margin-bottom: 23px;
+}
+
+.update-form-group label {
+  display: block;
+  color: var(--brown);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.update-input-wrapper {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  background: #fffaf0;
+  border-radius: 9px;
+  transition: 0.3s;
+}
+
+.update-input-wrapper:focus-within {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px rgba(242, 169, 0, 0.12);
+}
+
+.update-input-wrapper > i {
+  color: var(--orange);
+  font-size: 19px;
+}
+
+.update-input-wrapper input {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: var(--brown);
+  font-size: 14px;
+}
+
+.update-input-wrapper input::placeholder {
+  color: #a18b6d;
+}
+
+.update-readonly {
+  background: #eee2c4;
+  opacity: 0.8;
+}
+
+.update-readonly input {
+  cursor: not-allowed;
+}
+
+.update-input-wrapper .update-lock {
+  font-size: 15px;
+}
+
+.update-input-hint {
+  display: block;
+  color: var(--brown-muted);
+  font-size: 11px;
+  margin-top: 8px;
+}
+
+/* Alerts */
+
+.update-alert {
+  padding: 13px 15px;
+  border-radius: 8px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.update-error {
+  background: rgba(190, 50, 30, 0.09);
+  color: #a52d1d;
+  border: 1px solid rgba(190, 50, 30, 0.2);
+}
+
+.update-success {
+  background: rgba(70, 114, 53, 0.1);
+  color: var(--green);
+  border: 1px solid rgba(70, 114, 53, 0.25);
+}
+
+/* Buttons */
+
+.update-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 13px;
+  margin-top: 32px;
+}
+
+.update-form-actions button {
+  min-width: 145px;
+  height: 46px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  transition: 0.3s;
+}
+
+.update-cancel-btn {
+  background: transparent;
+  border: 1px solid rgba(77, 42, 0, 0.3);
+  color: var(--brown);
+}
+
+.update-cancel-btn:hover {
+  background: #eee2c4;
+  border-color: var(--brown-muted);
+}
+
+.update-save-btn {
+  background: var(--amber);
+  border: 1px solid var(--amber);
+  color: var(--brown);
+}
+
+.update-save-btn:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.update-form-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.update-spinner {
+  animation: updateSpin 1s linear infinite;
+}
+
+@keyframes updateSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Footer */
+
+.update-profile-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: var(--brown-muted);
+  font-size: 12px;
+  margin-top: 25px;
+}
+
+.update-profile-footer i {
+  color: var(--green);
+  font-size: 16px;
+}
+
+/* Login message */
+
+.update-profile-message {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-color);
+  color: var(--brown);
+  text-align: center;
+  gap: 12px;
+}
+
+.update-profile-message > i {
+  font-size: 45px;
+  color: var(--orange);
+}
+
+.update-profile-message p {
+  color: var(--brown-muted);
+}
+
+.update-profile-message a {
+  color: var(--orange);
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .update-profile-page {
+    padding: 35px 15px;
+  }
+
+  .update-profile-header h1 {
+    font-size: 28px;
+  }
+
+  .update-header-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 23px;
+  }
+
+  .update-profile-card {
+    padding: 22px 17px;
+  }
+
+  .update-avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+  }
+
+  .update-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .update-form-actions button {
+    width: 100%;
+  }
+}
